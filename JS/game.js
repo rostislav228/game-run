@@ -118,7 +118,7 @@ function a() {
       trx[3] = 0;
     }
     for (let index = 0; index <= r; index += 1) {
-      trx[index] = triangle[q].x + 50 * index;
+      trx[index] = triangle[q].x + 50 * index - 25;
     }
   }
 
