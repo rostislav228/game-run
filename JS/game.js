@@ -90,7 +90,7 @@ function direction(e) {
     return;
   }
 
-  if (e.keyCode === 39) {
+  if (e.keyCode === 39 && cube.x <= 600) {
     cube.x += 250;
   }
 }
