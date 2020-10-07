@@ -51,26 +51,6 @@ const triangle = [
     x: 1000,
     y: canvasH - 115,
   },
-  {
-    x: 1000,
-    y: canvasH - 115,
-  },
-  {
-    x: 1000,
-    y: canvasH - 115,
-  },
-  {
-    x: 1000,
-    y: canvasH - 115,
-  },
-  {
-    x: 1000,
-    y: canvasH - 115,
-  },
-  {
-    x: 1000,
-    y: canvasH - 115,
-  },
 ];
 
 let r = Math.floor(Math.random() * 3 + 1);
@@ -86,7 +66,7 @@ const cubex = [];
 const trx = [];
 
 function direction(e) {
-  if (e.keyCode !== 39) {
+  if (e.keyCode !== 39 || cube.x >= 600) {
     return;
   }
 
@@ -154,12 +134,12 @@ function c(x, y) {
   }
 }
 
-function drawGame() {
+function drawGame1() {
   ctx.drawImage(background1, background_1.x, background_1.y);
   ctx.drawImage(background2, background_2.x, background_2.y);
 
-  background_1.x -= 1;
-  background_2.x -= 1;
+  background_1.x -= 0.1;
+  background_2.x -= 0.1;
 
   if (background_1.x <= -1024) {
     background_1.x = 1024;
@@ -168,45 +148,19 @@ function drawGame() {
     background_2.x = 1024;
   }
 
-  score += 1;
+  score += 0.05;
+  let scoreZ = score.toFixed(2);
 
-  ctx.fillStyle = 'black';
-  ctx.fillRect(ground_1.x, ground_1.y, 960, 100);
-  c(cube.x, cube.y);
-
-  ctx.fillStyle = 'white';
-  ctx.font = '50px Arial';
-  ctx.fillText(score, 100, 50);
-}
-
-function drawGame1() {
-  if (score >= 100 && score <= 200) {
-    ctx.fillStyle = 'black';
-    ctx.font = '50px Arial';
-    ctx.fillText('*хлоп-хлоп* молодец', 240, 100);
-  } else if (score >= 500 && score <= 600) {
-    ctx.fillStyle = 'rgb(255,0,0)';
-    ctx.font = '50px Arial';
-    ctx.fillText('ну это иззи, попробуй до 1000)', 240, 100);
-  } else if (score >= 1000 && score <= 1100) {
-    ctx.fillStyle = 'rgb(51,225,51)';
-    ctx.font = '50px Arial';
-    ctx.fillText('ты ах*ел? Попробуй до 1500', 240, 100);
-  } else if (score >= 1500 && score <= 2000) {
-    ctx.fillStyle = 'rgb(51,225,51)';
-    ctx.font = '50px Arial';
-    ctx.fillText('поздравляю, ты выиграл - геморой', 100, 100);
-  }
   ctx.fillStyle = 'black';
   a();
-  if (score >= 1000) {
+  if (scoreZ >= 1000) {
     a();
     a();
     a();
-  } else if (score >= 500) {
+  } else if (scoreZ >= 500) {
     a();
     a();
-  } else if (score >= 100) {
+  } else if (scoreZ >= 100) {
     a();
   }
   b();
@@ -214,9 +168,34 @@ function drawGame1() {
     cube.x -= 1;
   }
   ctx.clearRect(-300, 0, 300, 540);
+
+  ctx.fillStyle = 'black';
+  ctx.fillRect(ground_1.x, ground_1.y, 960, 100);
+  c(cube.x, cube.y);
+
+  ctx.fillStyle = 'white';
+  ctx.font = '50px Arial';
+  ctx.fillText(scoreZ, 100, 50);
+  if (scoreZ >= 100 && scoreZ <= 200) {
+    ctx.fillStyle = 'black';
+    ctx.font = '50px Arial';
+    ctx.fillText('*хлоп-хлоп* молодец', 240, 100);
+  } else if (scoreZ >= 500 && scoreZ <= 600) {
+    ctx.fillStyle = 'rgb(255,0,0)';
+    ctx.font = '50px Arial';
+    ctx.fillText('ну это иззи, попробуй до 1000)', 240, 100);
+  } else if (scoreZ >= 1000 && scoreZ <= 1100) {
+    ctx.fillStyle = 'rgb(51,225,51)';
+    ctx.font = '50px Arial';
+    ctx.fillText('ты ах*ел? Попробуй до 1500', 240, 100);
+  } else if (scoreZ >= 1500 && scoreZ <= 2000) {
+    ctx.fillStyle = 'rgb(51,225,51)';
+    ctx.font = '50px Arial';
+    ctx.fillText('поздравляю, ты выиграл - геморой', 100, 100);
+  }
+  ctx.fillStyle = 'black';
 }
 
-let game = setInterval(drawGame, 100);
 let game1 = setInterval(drawGame1, 1);
 
 // ctx.drawImage(more, animation(), 0, 150, 120, 100, 370, 150, 120);
